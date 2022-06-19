@@ -8,18 +8,49 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body> 
+    <!-- <div id="app">
+        {{ year }} <br>
+        <button v-on:click="plus">더하기</button>
+        <button v-on:click="minus">빼기</button>
+    </div> -->
     <div id="app">
-        <button>Click ME</button>
+        <form v-on:submit.prevent="submit">
+            <input type="text"><br>
+            <button type="submit">Submit</button>
+        </form>
     </div>
     <script>
-        // 이 테그 안에 뷰를 사용 할 수 있음
         new Vue({
             el: '#app',
             data: {
+                year : 2022
             },
             methods: {
+                plus(){
+                    this.year++;
+                },
+                minus(){
+                    this.year--;
+                },
+                submit(){
+                    alert('submitted');
+                    console.log('hello');
+                }
             }
         })
     </script>
 </body>
 </html>
+<!-- 
+  원래는 SUBMIT을하면 리로드를 하는데 이벤트 수식어를 통하여 막을 수 있다.   
+    이벤트 수식어 
+.stop  - storp
+.prevent - preventDefault 리로드를 막음
+.capture
+.self
+.once
+.passive
+    키 수식어
+    key up key down 등등 
+    키가 눌러졌을때를 받아서 할수있다. 공식 홈페이지에 나와있음 
+-->
