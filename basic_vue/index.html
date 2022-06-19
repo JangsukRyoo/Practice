@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 기초 익히기</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body> 
+    <div id="app">
+        {{ nextYear('안녕하세요') }}
+        <input type ="text"> 
+    </div>
+    <script>
+        // 이 테그 안에 뷰를 사용 할 수 있음
+        new Vue({
+            el: '#app',
+            data: {
+                person: {
+                    name : '라떼',
+                    age : 31
+                } 
+            },
+            methods: {
+                // nextYear : function(greeting){
+                //줄여 쓸 수 있음
+                    nextYear(greeting) {
+                    //this이 data 안에있음
+                    return greeting + '! ' + this.person.name + '는 내년에 ' + (this.person.age +1) + '살 입니다.';
+                },
+                otherMethod: function(){
+                    this.nextYear();
+                }
+            }
+        })
+    </script>
+</body>
+</html>
