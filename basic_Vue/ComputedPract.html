@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 기초 익히기</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body> 
+    <div id="app">
+        <button @click="changeMessage">Click</button> <br>
+        {{ reversedMessage }}
+        {{ reversedMessage }}
+        {{ reversedMessage }}
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                    message: '헬로우'
+                },
+            methods: {
+                changeMessage(){
+                    this.message ="망고라떼";
+                }
+                // reversedMessage(){
+                //     return this.message.split('').reverse().join('')
+                // }
+                //호출 할때마다 값을 계산함 
+            },
+            computed: {
+                reversedMessage(){
+                    return this.message.split('').reverse().join('')
+                } 
+                // 값이 미리 저장이 되어있어 저장되어있는 값을 뿌려줌 
+            }
+        })
+    </script>
+</body>
+</html>
+ 
+<!-- Computed와 Method 차이 computed는 캐싱을 하여 값이 저장이됨 Method는 캐싱을 하지 않음 -->
