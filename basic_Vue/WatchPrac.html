@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 기초 익히기</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body> 
+    <div id="app">
+        {{ message }}<br>
+        <button @click="changeMessage">Click</button> <br>
+        {{ updated }}
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                    message: '헬로우',
+                    updated: '아니오'
+                },
+            methods: {
+                changeMessage(){
+                    this.message ="라떼";
+                }
+            },
+            computed: {
+                reversedMessage(){
+                    return this.message.split('').reverse().join('')
+                } 
+            },
+            watch: {
+                message(newVal, oldVal){
+                    console.log(newVal, oldVal);
+                    this.updated='네';
+                    // new에는 새로운 벨류 old에는 이전 벨류가 나옴 -
+                }
+            }
+        
+        })
+    </script>
+</body>
+</html>
+<!-- Computed 속성이 더 간결하여 최대한 Computed 속성을 사용한다.  -->
+ 
