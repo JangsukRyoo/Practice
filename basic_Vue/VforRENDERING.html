@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 기초 익히기</title>
+    <style>
+        .red{
+            color:red;
+        }
+        .font-bold{
+            font-weight: bold;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body> 
+    <div id="app">
+        <div>
+            {{ people[0].name }} {{ people[0].age }}
+        </div>
+        <div>
+            {{ people[1].name }} {{ people[1].age }}
+        </div>
+        <div>
+            {{ people[2].name }} {{ people[2].age }}
+        </div>
+        <div>
+            {{ people[3].name }} {{ people[3].age }}
+        </div>
+    
+        <hr>
+        <!-- person of people / person in people 둘다 상관없음.
+        유니크 한 값일떄  key를 설정해준다. 보통 DB에서는 ID값을 사용함 persion.id같이 
+        key값은 유니크한 값이어야지 index인경우 index가  바뀔떄 애매해진다.
+        객체도 V-for 로 사용 가능하다. -->
+        <div v-for="(person, index) in people" :key="person.name"> 
+            {{ person.name }} {{ person.age }} {{index}}
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                people: [
+                    { name:'a', age:20},
+                    { name:'b', age:21},
+                    { name:'c', age:22},
+                    { name:'d', age:23},
+                    { name:'e', age:24}
+                ]
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+</html>
+
+ 
