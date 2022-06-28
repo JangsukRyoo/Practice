@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 기초 익히기</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body> 
+    <div id="app">
+        <!-- {{ name }}<br>
+        <button @click="changeText">Click</button>
+        <hr> -->
+
+        <jsr-button></jsr-button>
+    
+    </div>
+    
+    <hr><hr>
+
+    <div id="app-1">
+        {{ name }}<br>
+        <button @click="changeText">Click</button>
+
+    </div>
+
+    <script>
+        // Vue.component('hello-world',{
+        //     template:
+        //     `<div>hello word<div>`
+        //     });
+
+        // Vue.component("jsr-button", {
+        //     template: `
+        //     <div>
+        //             {{ name }} <br>
+        //         <hello-world></hello-world>
+        //          <button @click="changeText">Click</button>
+        //     </div>
+        //     `,
+        //     data() {
+        //         return{
+        //             name: 'jsr'
+        //         }
+        //     },
+        //     methods: {
+        //         changeText(){
+        //             this.name ="jsr updated";
+        //         }
+        //     },
+        // });
+
+        const HelloWorld ={
+            template:  `<div>hello word<div>`
+        };
+        const JsrButton = {
+            components:{
+                'hello-world': HelloWorld
+            },
+            template: `
+            <div>
+                    {{ name }} <br>
+                <hello-world></hello-world>
+                 <button @click="changeText">Click</button>
+            </div>
+            `,
+            data() {
+                return{
+                    name: 'jsr'
+                }
+            },
+            methods: {
+                changeText(){
+                    this.name ="jsr updated";
+                }
+            },
+        };
+
+        const app = new Vue({
+            el: '#app',
+            components:{
+                'jsr-button': JsrButton
+            }
+            // data: {
+            //     name: 'jsr'
+            // },
+            // methods: {
+            //     changeText(){
+            //         this.name ="jsr updated";
+            //     },
+            // },
+        })
+
+        const app1 = new Vue({
+            el: '#app-1',
+            data: {
+                name: "jsr1"
+            },
+            methods: {
+                changeText(){
+                    this.name = "jsr1 updated"
+                },
+            }
+        })
+
+    </script>
+</body>
+</html>
+
+ 
