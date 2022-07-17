@@ -1,7 +1,16 @@
 <template>
     <div>
-        <h1>{{ title }}</h1>
-        <p>{{ name }}</p>
+        <!-- <h1>{{ title }}</h1> -->
+        <!-- <p>{{ name }}</p> -->
+
+        <!-- slot 사용하기-->
+        <p>header</p>
+        <slot name="header" :js="js"></slot>
+        <p>body</p>
+        <slot></slot>
+        <p>footer</p>
+        <slot></slot>
+        <br>
         <button @click="updateName">CHANGE NAME</button>
     </div>
 
@@ -24,6 +33,7 @@ export default{
     },
     data(){
        return {
+        js: 'rr jsr',
         // props로 설정을 해서 같은 name
         // name: 'JSR',
        }
