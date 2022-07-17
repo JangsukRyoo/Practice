@@ -1,7 +1,8 @@
 <template>
   <div>
     <h1>"This is Home Page" </h1>
-    <JSR/>
+    <JSR title="home title"/>
+    <JSR />>
   </div>
 </template>
 
