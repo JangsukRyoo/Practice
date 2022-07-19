@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>{{ title }}</h1>
-        <p>{{ name}}</p>
+        <p>{{ name }}</p>
         <button @click="updateName">CHANGE NAME</button>
     </div>
 
