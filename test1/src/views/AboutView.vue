@@ -2,7 +2,7 @@
   <div class="about">
     <h1>This is an about page</h1>
     <LatteGo title="title1" />
-    
+     
     <JSR>
       <template #header="{ js }">
         <p>header1 {{ js }}</p>

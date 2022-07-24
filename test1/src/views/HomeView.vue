@@ -25,6 +25,7 @@ export default{
       name:'JSRJSR'
     }
   },
+  
   // methods: {
   //   updateName(name){
   //     this.name = name;
