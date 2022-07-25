@@ -17,9 +17,6 @@ import InputField from '../components/InputField.vue'
 
 export default{
   components: { InputField }, 
-  // components:{
-  //   JSR
-  // },
   data(){
     return{
       name:'JSRJSR'
