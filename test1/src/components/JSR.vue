@@ -34,15 +34,12 @@ export default{
     data(){
        return {
         js: 'rr jsr',
-        // props로 설정을 해서 같은 name
-        // name: 'JSR',
        }
     },
 
     methods: {
         updateName() {
-            // 이것도 마찬가지로 바꿀수 없음
-           // this.name = 'JSR UPDATED';
+
         }       
     },
 }
