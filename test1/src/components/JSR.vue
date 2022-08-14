@@ -36,7 +36,6 @@ export default{
         js: 'rr jsr',
        }
     },
-
     methods: {
         updateName() {
 
