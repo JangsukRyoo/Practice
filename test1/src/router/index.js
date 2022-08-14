@@ -8,7 +8,6 @@ const routes = [
     name: 'home',
     component: HomeView
   },
-  
   {
     path: '/about',
     name: 'about',
@@ -18,7 +17,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   }
 ]
-
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
