@@ -16,7 +16,13 @@
       @toggle-checkbox="toggleCheckbox"
       @click-delete="deleteTodo"
     />
+ <div class=video-container style="TEXT-ALIGN: center">
+    <object type="text/html" width="1000" height="500" data="//www.youtube.com/embed/FtE-NTr9byI?rel=0" allowFullScreen/>
+    
+</div>
   </div>
+
+
 </template>
 
 <script>
@@ -36,10 +42,6 @@ export default {
   },
   methods: {
     deleteTodo(id) {
-      // const index = this.todos.findIndex(todo => {
-      //   return todo.id === id;
-      // });
-      // this.todos.splice(index, 1);
       this.todos = this.todos.filter(todo => todo.id !== id);
     },
     addTodo(e) {
@@ -59,3 +61,42 @@ export default {
   }
 }
 </script>
+
+  <script>
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      var player;
+
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '360',
+          width: '640',
+          videoId: 'M7lc1UVf-VE',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+
+      var done = false;
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+          setTimeout(stopVideo, 6000);
+          done = true;
+        }
+      }
+      function stopVideo() {
+        player.stopVideo();
+      }
+
+    </script>
+
