@@ -1,47 +1,61 @@
 <template>
-  <div id="app" class ="container">
-    <h1 class ="text-center"> Todo App</h1>
+  <div id="app" class="container">
+    <h1 class="text-center">Todo App</h1>
     <input 
-    v-model="todoText"
-    type="text" 
-    class="w-100 p-2" p
-    laceholder="Type todo"
-    @keyup.enter="addTodo"> 
+      v-model="todoText"
+      type="text" 
+      class="w-100 p-2" 
+      placeholder="Type todo"
+      @keyup.enter="addTodo"
+    >
     <hr>
-  <todo-list v-for="todo in todos" :key="todo.id" :todo="todo"/>
-
+    <Todo 
+      v-for="todo in todos" 
+      :key="todo.id" 
+      :todo="todo"
+      @toggle-checkbox="toggleCheckbox"
+      @click-delete="deleteTodo"
+    />
   </div>
 </template>
 
 <script>
-
-import TodoList from './components/TodoList.vue';
- 
+import Todo from './components/TodoList.vue'
 export default {
-  components: { TodoList },
-  data(){
-    return{
-    todoText: '',
-    todos:[
-      { id:1, text: "buy a car", checked:false}, 
-      { id:2, text: "play game", checked:false},
-      ]
-     }
+  components: {
+    Todo
   },
-
+  data() {
+    return {
+      todoText: '',
+      todos: [
+        { id: 1, text: 'buy a car', checked: false},
+        { id: 2, text: 'play game', checked: false},
+      ]
+    }
+  },
   methods: {
-    addTodo(e){
-      this.todos.push(
-        {
+    deleteTodo(id) {
+      // const index = this.todos.findIndex(todo => {
+      //   return todo.id === id;
+      // });
+      // this.todos.splice(index, 1);
+      this.todos = this.todos.filter(todo => todo.id !== id);
+    },
+    addTodo(e) {
+      this.todos.push({
         id: Math.random(),
-        text:e.target.value,
+        text: e.target.value,
         checked: false
-        });
-        this.todoText='';
+      });
+      this.todoText = '';
+    },
+    toggleCheckbox({id, checked}) {
+      const index = this.todos.findIndex(todo => {
+        return todo.id === id;
+      });
+      this.todos[index].checked = checked;
     }
   }
 }
 </script>
-<style>
-
-</style>
