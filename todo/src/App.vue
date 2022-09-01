@@ -18,7 +18,6 @@
     />
  <div class=video-container style="TEXT-ALIGN: center">
     <object type="text/html" width="1000" height="500" data="//www.youtube.com/embed/FtE-NTr9byI?rel=0" allowFullScreen/>
-    
 </div>
   </div>
 </template>
@@ -94,6 +93,5 @@ export default {
       function stopVideo() {
         player.stopVideo();
       }
-
     </script>
 
