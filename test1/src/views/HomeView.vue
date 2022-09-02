@@ -10,7 +10,6 @@
     {{ name }}
   </div>
 </template>
-
 <script>
 import InputField from '../components/InputField.vue'
 // import JSR from '@/components/JSR.vue';
