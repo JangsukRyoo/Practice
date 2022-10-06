@@ -1,121 +1,96 @@
 <template>
-  <div class="container-fluid">
-    <div class="col-md-12">
-      <div class="row">
-        <wj-pdf-viewer serviceUrl="https://www.grapecity.com/componentone/demos/aspnet/c1webapi/latest/api/pdf"
-                       filePath="PdfRoot/DefaultDocument.pdf"
-                       :viewMode="viewMode" :mouseMode="mouseMode" :fullScreen="fullScreen" :zoomFactor="zoomFactor"
-                       :viewModeChanged="viewModeChanged" :fullScreenChanged="fullScreenChanged" :zoomFactorChanged="zoomFactorChanged">
-        </wj-pdf-viewer>
-      </div>
-      <br />
-      <div class="row">
-        <div class="form-horizontal">
-          <div class="form-group">
-            <div class="col-md-3">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" v-model="continuousViewMode" />
-                  Continuous View Mode
-                </label>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <wj-menu
-                  :value="mouseMode"
-                  :header="'Mouse Mode'"
-                  :itemClicked="mouseModeChanged">
-                <wj-menu-item :value="mouseModes.SelectTool">
-                  SelectTool
-                </wj-menu-item>
-                <wj-menu-item :value="mouseModes.MoveTool">
-                  MoveTool
-                </wj-menu-item>
-                <wj-menu-item :value="mouseModes.RubberbandTool">
-                  RubberbandTool
-                </wj-menu-item>
-                <wj-menu-item :value="mouseModes.MagnifierTool">
-                  MagnifierTool
-                </wj-menu-item>
-              </wj-menu>
-            </div>
-            <div class="col-md-2">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" v-model="fullScreen" /> Full Screen
-                </label>
-              </div>
-            </div>
-            <div class="col-mod-4">
-              <label class="col-md-2 control-label">Zoom Factor</label>
-              <div class="col-md-2">
-                <wj-input-number :value="zoomFactor" :min=0.05 :max=10 :step=0.1 format="n2" :valueChanged="zoomFactorValueChanged">
-                </wj-input-number>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div id="app" class="container">
+    <h1 class="text-center">Todo App</h1>
+    <input 
+      v-model="todoText"
+      type="text" 
+      class="w-100 p-2" 
+      placeholder="Type todo"
+      @keyup.enter="addTodo"
+    >
+    <hr>
+    <Todo 
+      v-for="todo in todos" 
+      :key="todo.id" 
+      :todo="todo"
+      @toggle-checkbox="toggleCheckbox"
+      @click-delete="deleteTodo"
+    />
+ <div class=video-container style="TEXT-ALIGN: center">
+    <object type="text/html" width="1000" height="500" data="//www.youtube.com/embed/FtE-NTr9byI?rel=0" allowFullScreen/>
+</div>
   </div>
 </template>
-
 <script>
-import 'boot'
-import '@grapecity/wijmo.styles/wijmo.css';
-import Vue from 'vue';
-import * as viewer from '@grapecity/wijmo.viewer';
-import '@grapecity/wijmo.vue2.input';
-import '@grapecity/wijmo.vue2.viewer';
-//
-new Vue({
-  el: '#app',
-  data: {
-    viewMode: viewer.ViewMode.Single,
-    mouseMode: viewer.MouseMode.SelectTool,
-    fullScreen: false,
-    zoomFactor: 1,
-    mouseModes: viewer.MouseMode
+import Todo from './components/TodoList.vue'
+export default {
+  components: {
+    Todo
   },
-  computed: {
-    continuousViewMode: {
-      get() {
-        return this.viewMode;
-      },
-      set(value) {
-        this.viewMode = value ? viewer.ViewMode.Continuous : viewer.ViewMode.Single;
-      }
+  data() {
+    return {
+      todoText: '',
+      todos: [
+        { id: 1, text: 'buy a car', checked: false},
+        { id: 2, text: 'play game', checked: false},
+      ]
     }
   },
   methods: {
-    viewModeChanged(sender) {
-      this.viewMode = sender.viewMode;
+    deleteTodo(id) {
+      this.todos = this.todos.filter(todo => todo.id !== id);
     },
-    mouseModeChanged(sender) {
-      if (sender.selectedItem) {
-        this.mouseMode = sender.selectedItem.value;
-      }
+    addTodo(e) {
+      this.todos.push({
+        id: Math.random(),
+        text: e.target.value,
+        checked: false
+      });
+      this.todoText = '';
     },
-    fullScreenChanged(sender) {
-      this.fullScreen = sender.fullScreen;
-    },
-    zoomFactorChanged(sender) {
-      this.zoomFactor = sender.zoomFactor;
-    },
-    zoomFactorValueChanged(sender) {
-      this.zoomFactor = sender.value;
+    toggleCheckbox({id, checked}) {
+      const index = this.todos.findIndex(todo => {
+        return todo.id === id;
+      });
+      this.todos[index].checked = checked;
     }
   }
-});
+}
 </script>
 
-<style>
-body {
-  margin-bottom: 24px;
-}
+  <script>
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-.container-fluid .wj-viewer {
-  width: 100%;
-  display: block;
-}
-</style>
+      var player;
+
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '360',
+          width: '640',
+          videoId: 'M7lc1UVf-VE',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+
+      var done = false;
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+          setTimeout(stopVideo, 6000);
+          done = true;
+        }
+      }
+      function stopVideo() {
+        player.stopVideo();
+      }
+    </script>
+
